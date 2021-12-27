@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.goldeneyes.IDao.CooperateNoticeManMapper" >
+  <resultMap id="BaseResultMap" type="com.goldeneyes.pojo.CooperateNoticeMan" >
+    <id column="TabId" property="tabid" jdbcType="INTEGER" />
+    <result column="NoticeId" property="noticeid" jdbcType="INTEGER" />
+    <result column="NoticeTag" property="noticetag" jdbcType="VARCHAR" />
+    <result column="ReceiveManId" property="receivemanid" jdbcType="BIGINT" />
+    <result column="ReceiveManCode" property="receivemancode" jdbcType="VARCHAR" />
+    <result column="ReceiveManName" property="receivemanname" jdbcType="VARCHAR" />
+    <result column="ReceiveManPic" property="receivemanpic" jdbcType="VARCHAR" />
+    <result column="ReceiveTime" property="receivetime" jdbcType="TIMESTAMP" />
+    <result column="ReplyContent" property="replycontent" jdbcType="VARCHAR" />
+    <result column="ReplyTime" property="replytime" jdbcType="TIMESTAMP" />
+    <result column="EncName" property="encname" jdbcType="VARCHAR" />
+    <result column="EncAddr" property="encaddr" jdbcType="VARCHAR" />
+    <result column="ReadTime" property="readtime" jdbcType="TIMESTAMP" />
+    <result column="DoneTime" property="donetime" jdbcType="TIMESTAMP" />
+    <result column="Status" property="status" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TabId, NoticeId, NoticeTag, ReceiveManId, ReceiveManCode, ReceiveManName, ReceiveManPic, 
+    ReceiveTime, ReplyContent, ReplyTime, EncName, EncAddr, ReadTime, DoneTime, Status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from CooperateNoticeMan
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from CooperateNoticeMan
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.goldeneyes.pojo.CooperateNoticeMan" >
+    insert into CooperateNoticeMan (TabId, NoticeId, NoticeTag, 
+      ReceiveManId, ReceiveManCode, ReceiveManName, 
+      ReceiveManPic, ReceiveTime, ReplyContent, 
+      ReplyTime, EncName, EncAddr, 
+      ReadTime, DoneTime, Status
+      )
+    values (#{tabid,jdbcType=INTEGER}, #{noticeid,jdbcType=INTEGER}, #{noticetag,jdbcType=VARCHAR}, 
+      #{receivemanid,jdbcType=BIGINT}, #{receivemancode,jdbcType=VARCHAR}, #{receivemanname,jdbcType=VARCHAR}, 
+      #{receivemanpic,jdbcType=VARCHAR}, #{receivetime,jdbcType=TIMESTAMP}, #{replycontent,jdbcType=VARCHAR}, 
+      #{replytime,jdbcType=TIMESTAMP}, #{encname,jdbcType=VARCHAR}, #{encaddr,jdbcType=VARCHAR}, 
+      #{readtime,jdbcType=TIMESTAMP}, #{donetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.goldeneyes.pojo.CooperateNoticeMan" >
+    insert into CooperateNoticeMan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        TabId,
+      </if>
+      <if test="noticeid != null" >
+        NoticeId,
+      </if>
+      <if test="noticetag != null" >
+        NoticeTag,
+      </if>
+      <if test="receivemanid != null" >
+        ReceiveManId,
+      </if>
+      <if test="receivemancode != null" >
+        ReceiveManCode,
+      </if>
+      <if test="receivemanname != null" >
+        ReceiveManName,
+      </if>
+      <if test="receivemanpic != null" >
+        ReceiveManPic,
+      </if>
+      <if test="receivetime != null" >
+        ReceiveTime,
+      </if>
+      <if test="replycontent != null" >
+        ReplyContent,
+      </if>
+      <if test="replytime != null" >
+        ReplyTime,
+      </if>
+      <if test="encname != null" >
+        EncName,
+      </if>
+      <if test="encaddr != null" >
+        EncAddr,
+      </if>
+      <if test="readtime != null" >
+        ReadTime,
+      </if>
+      <if test="donetime != null" >
+        DoneTime,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        #{tabid,jdbcType=INTEGER},
+      </if>
+      <if test="noticeid != null" >
+        #{noticeid,jdbcType=INTEGER},
+      </if>
+      <if test="noticetag != null" >
+        #{noticetag,jdbcType=VARCHAR},
+      </if>
+      <if test="receivemanid != null" >
+        #{receivemanid,jdbcType=BIGINT},
+      </if>
+      <if test="receivemancode != null" >
+        #{receivemancode,jdbcType=VARCHAR},
+      </if>
+      <if test="receivemanname != null" >
+        #{receivemanname,jdbcType=VARCHAR},
+      </if>
+      <if test="receivemanpic != null" >
+        #{receivemanpic,jdbcType=VARCHAR},
+      </if>
+      <if test="receivetime != null" >
+        #{receivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replycontent != null" >
+        #{replycontent,jdbcType=VARCHAR},
+      </if>
+      <if test="replytime != null" >
+        #{replytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="encname != null" >
+        #{encname,jdbcType=VARCHAR},
+      </if>
+      <if test="encaddr != null" >
+        #{encaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="readtime != null" >
+        #{readtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="donetime != null" >
+        #{donetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.goldeneyes.pojo.CooperateNoticeMan" >
+    update CooperateNoticeMan
+    <set >
+      <if test="noticeid != null" >
+        NoticeId = #{noticeid,jdbcType=INTEGER},
+      </if>
+      <if test="noticetag != null" >
+        NoticeTag = #{noticetag,jdbcType=VARCHAR},
+      </if>
+      <if test="receivemanid != null" >
+        ReceiveManId = #{receivemanid,jdbcType=BIGINT},
+      </if>
+      <if test="receivemancode != null" >
+        ReceiveManCode = #{receivemancode,jdbcType=VARCHAR},
+      </if>
+      <if test="receivemanname != null" >
+        ReceiveManName = #{receivemanname,jdbcType=VARCHAR},
+      </if>
+      <if test="receivemanpic != null" >
+        ReceiveManPic = #{receivemanpic,jdbcType=VARCHAR},
+      </if>
+      <if test="receivetime != null" >
+        ReceiveTime = #{receivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replycontent != null" >
+        ReplyContent = #{replycontent,jdbcType=VARCHAR},
+      </if>
+      <if test="replytime != null" >
+        ReplyTime = #{replytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="encname != null" >
+        EncName = #{encname,jdbcType=VARCHAR},
+      </if>
+      <if test="encaddr != null" >
+        EncAddr = #{encaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="readtime != null" >
+        ReadTime = #{readtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="donetime != null" >
+        DoneTime = #{donetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.goldeneyes.pojo.CooperateNoticeMan" >
+    update CooperateNoticeMan
+    set NoticeId = #{noticeid,jdbcType=INTEGER},
+      NoticeTag = #{noticetag,jdbcType=VARCHAR},
+      ReceiveManId = #{receivemanid,jdbcType=BIGINT},
+      ReceiveManCode = #{receivemancode,jdbcType=VARCHAR},
+      ReceiveManName = #{receivemanname,jdbcType=VARCHAR},
+      ReceiveManPic = #{receivemanpic,jdbcType=VARCHAR},
+      ReceiveTime = #{receivetime,jdbcType=TIMESTAMP},
+      ReplyContent = #{replycontent,jdbcType=VARCHAR},
+      ReplyTime = #{replytime,jdbcType=TIMESTAMP},
+      EncName = #{encname,jdbcType=VARCHAR},
+      EncAddr = #{encaddr,jdbcType=VARCHAR},
+      ReadTime = #{readtime,jdbcType=TIMESTAMP},
+      DoneTime = #{donetime,jdbcType=TIMESTAMP},
+      Status = #{status,jdbcType=TINYINT}
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+  <!-- 获取未处理个数 -->
+  <select id="getNoDoneCntByMan" resultType="java.lang.Integer">
+	select COUNT(n.tabid)
+	from CooperateNotice n,CooperateNoticeMan nm
+	where n.tabid = nm.NoticeId and nm.ReceiveManId = #{arg1}
+	and n.SchoolId = #{arg0} and nm.Status = 2 and n.Status = 1 and n.IsShow = 1
+  </select>
+	<!-- 获取协同事务未读数 -->
+	<select id="getNewNoReadCntByMan" resultType="java.lang.Integer">
+		select COUNT(n.tabid)
+		from CooperateNotice n,CooperateNoticeMan nm
+		where n.tabid = nm.NoticeId and nm.ReceiveManId = #{arg1}
+		and n.SchoolId = #{arg0} and nm.Status = 1 and n.Status = 1
+		and nm.ReadTime &lt; n.LastReplyTime
+		and n.LastReceiveManId != #{arg1} and n.IsShow = 1
+	 </select>
+</mapper>

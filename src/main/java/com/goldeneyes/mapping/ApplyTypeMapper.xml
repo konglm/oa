@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.goldeneyes.IDao.ApplyTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.goldeneyes.pojo.ApplyType" >
+    <result column="TabId" property="tabid" jdbcType="INTEGER" />
+    <result column="SchoolId" property="schoolid" jdbcType="VARCHAR" />
+    <result column="TypeName" property="typename" jdbcType="VARCHAR" />
+    <result column="IsInner" property="isinner" jdbcType="TINYINT" />
+    <result column="Status" property="status" jdbcType="TINYINT" />
+  </resultMap>
+  <insert id="insert" parameterType="com.goldeneyes.pojo.ApplyType" >
+    insert into ApplyType (TabId, SchoolId, TypeName, 
+      IsInner, Status)
+    values (#{tabid,jdbcType=INTEGER}, #{schoolid,jdbcType=VARCHAR}, #{typename,jdbcType=VARCHAR}, 
+      #{isinner,jdbcType=TINYINT}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.goldeneyes.pojo.ApplyType" >
+    insert into ApplyType
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        TabId,
+      </if>
+      <if test="schoolid != null" >
+        SchoolId,
+      </if>
+      <if test="typename != null" >
+        TypeName,
+      </if>
+      <if test="isinner != null" >
+        IsInner,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        #{tabid,jdbcType=INTEGER},
+      </if>
+      <if test="schoolid != null" >
+        #{schoolid,jdbcType=VARCHAR},
+      </if>
+      <if test="typename != null" >
+        #{typename,jdbcType=VARCHAR},
+      </if>
+      <if test="isinner != null" >
+        #{isinner,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <!-- 判断是否重名 -->
+  <select id="getApplyTypeCountByCondition" resultType="java.lang.Integer">
+		SELECT
+		COUNT(TabId) FROM ApplyType WHERE SchoolId=#{arg0} AND TypeName=#{arg1}
+  </select>
+  <!-- 新增申请类型 -->
+  <insert id="addApplyType" parameterType="com.goldeneyes.pojo.ApplyType" 
+		useGeneratedKeys="true" keyProperty="tabid">
+    insert into ApplyType (SchoolId, TypeName, 
+      IsInner, Status)
+    values (#{schoolid,jdbcType=VARCHAR}, #{typename,jdbcType=VARCHAR}, 
+      #{isinner,jdbcType=TINYINT}, #{status,jdbcType=TINYINT})
+  </insert>
+  <!-- 通过id获取学校ID -->
+  <select id="getSchoolIdByRecordId" resultType="com.goldeneyes.pojo.ApplyType">
+		SELECT SchoolId
+		FROM ApplyType WHERE TabId=#{arg0}
+  </select>
+  <!-- 获取条件下的申请类型 -->
+  <select id="getTableRecordByCondition" resultType="com.goldeneyes.pojo.ApplyType">
+		SELECT TabId, SchoolId, TypeName, IsInner, Status
+		FROM ApplyType WHERE SchoolId=#{arg0} AND TypeName=#{arg1}
+  </select>
+  <!-- 编辑申请类型 -->
+  <update id="setApplyType" parameterType="com.goldeneyes.pojo.ApplyType">
+		update ApplyType
+		set
+		TypeName = #{typename,jdbcType=VARCHAR},
+		Status =
+		#{status,jdbcType=TINYINT}
+		where
+		tabid = #{tabid,jdbcType=INTEGER}
+  </update>
+  <!-- 删除申请类型 -->
+  <delete id="delApplyType" parameterType="java.lang.Integer" >
+	    delete from ApplyType where TabId = #{arg0}
+  </delete>
+  <!-- 获取申请类型数量 -->
+  <select id="getTypesCnt" resultType="java.lang.Integer">
+		SELECT
+		COUNT(tabid) FROM ApplyType WHERE schoolId=#{schoolId}
+		<choose>
+			<when test="typename!=''">
+				and TypeName like '%${typeName}%'
+			</when>
+		</choose>
+		<choose>
+			<when test="status != -1">
+				and Status=#{status}
+			</when>
+		</choose>
+		<choose>
+			<when test="isInner != -1">
+				and IsInner=#{isInner}
+			</when>
+		</choose>
+  </select>
+  <!-- 获取申请类型列表  -->
+  <select id="getTypes" resultType="com.goldeneyes.pojo.ApplyType">
+		select
+		top(#{page_size})
+		TabId, SchoolId, TypeName, IsInner, Status
+		from
+		ApplyType
+		where
+		SchoolId=#{schoolId}
+		<choose>
+			<when test="typename!=''">
+				and TypeName like '%${typeName}%'
+			</when>
+		</choose>
+		<choose>
+			<when test="status != -1">
+				and Status=#{status}
+			</when>
+		</choose>
+		<choose>
+			<when test="isInner != -1">
+				and IsInner=#{isInner}
+			</when>
+		</choose>
+		and tabid
+		not
+		in
+		(select
+		top((#{page_number}-1) *
+		#{page_size}) tabid
+		from ApplyType
+		where
+		SchoolId=#{schoolId}
+		<choose>
+			<when test="typename!=''">
+				and TypeName like '%${typeName}%'
+			</when>
+		</choose>
+		<choose>
+			<when test="status != -1">
+				and Status=#{status}
+			</when>
+		</choose>
+		<choose>
+			<when test="isInner != -1">
+				and IsInner=#{isInner}
+			</when>
+		</choose>
+		order by TabId desc)
+		order by TabId desc
+	</select>
+</mapper>

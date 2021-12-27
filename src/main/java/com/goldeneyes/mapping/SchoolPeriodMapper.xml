@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.goldeneyes.IDao.SchoolPeriodMapper" >
+  <resultMap id="BaseResultMap" type="com.goldeneyes.pojo.SchoolPeriod" >
+    <id column="TabId" property="tabid" jdbcType="INTEGER" />
+    <result column="SchoolId" property="schoolid" jdbcType="VARCHAR" />
+    <result column="Period" property="period" jdbcType="VARCHAR" />
+    <result column="IsCurrent" property="iscurrent" jdbcType="TINYINT" />
+    <result column="OrderId" property="orderid" jdbcType="INTEGER" />
+    <result column="Status" property="status" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TabId, SchoolId, Period, IsCurrent, OrderId, Status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from SchoolPeriod
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from SchoolPeriod
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.goldeneyes.pojo.SchoolPeriod" >
+    insert into SchoolPeriod (TabId, SchoolId, Period, 
+      IsCurrent, OrderId, Status
+      )
+    values (#{tabid,jdbcType=INTEGER}, #{schoolid,jdbcType=VARCHAR}, #{period,jdbcType=VARCHAR}, 
+      #{iscurrent,jdbcType=TINYINT}, #{orderid,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.goldeneyes.pojo.SchoolPeriod" >
+    insert into SchoolPeriod
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        TabId,
+      </if>
+      <if test="schoolid != null" >
+        SchoolId,
+      </if>
+      <if test="period != null" >
+        Period,
+      </if>
+      <if test="iscurrent != null" >
+        IsCurrent,
+      </if>
+      <if test="orderid != null" >
+        OrderId,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        #{tabid,jdbcType=INTEGER},
+      </if>
+      <if test="schoolid != null" >
+        #{schoolid,jdbcType=VARCHAR},
+      </if>
+      <if test="period != null" >
+        #{period,jdbcType=VARCHAR},
+      </if>
+      <if test="iscurrent != null" >
+        #{iscurrent,jdbcType=TINYINT},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.goldeneyes.pojo.SchoolPeriod" >
+    update SchoolPeriod
+    <set >
+      <if test="schoolid != null" >
+        SchoolId = #{schoolid,jdbcType=VARCHAR},
+      </if>
+      <if test="period != null" >
+        Period = #{period,jdbcType=VARCHAR},
+      </if>
+      <if test="iscurrent != null" >
+        IsCurrent = #{iscurrent,jdbcType=TINYINT},
+      </if>
+      <if test="orderid != null" >
+        OrderId = #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.goldeneyes.pojo.SchoolPeriod" >
+    update SchoolPeriod
+    set SchoolId = #{schoolid,jdbcType=VARCHAR},
+      Period = #{period,jdbcType=VARCHAR},
+      IsCurrent = #{iscurrent,jdbcType=TINYINT},
+      OrderId = #{orderid,jdbcType=INTEGER},
+      Status = #{status,jdbcType=TINYINT}
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+  <!-- 判断是否重名 -->
+  <select id="getPeriodCntByCondition" resultType="java.lang.Integer">
+		SELECT
+		COUNT(TabId) FROM SchoolPeriod WHERE SchoolId=#{arg0} AND Period=#{arg1}
+  </select>
+  <!-- 判断是否排序重复 -->
+  <select id="getPeriodOrderCntByCondition" resultType="java.lang.Integer">
+		SELECT
+		COUNT(TabId) FROM SchoolPeriod WHERE SchoolId=#{arg0} AND OrderId=#{arg1}
+  </select>
+  <!-- 新增学期  -->
+  <insert id="addSchoolPeriod" parameterType="com.goldeneyes.pojo.SchoolPeriod" 
+		useGeneratedKeys="true" keyProperty="tabid">
+    insert into SchoolPeriod (SchoolId, Period, 
+      IsCurrent, OrderId, Status
+      )
+    values (#{schoolid,jdbcType=VARCHAR}, #{period,jdbcType=VARCHAR}, 
+      #{iscurrent,jdbcType=TINYINT}, #{orderid,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}
+      )
+  </insert>
+  <!-- 通过id获取学校ID -->
+  <select id="getSchoolIdByPeriodId" resultType="com.goldeneyes.pojo.SchoolPeriod">
+		SELECT SchoolId
+		FROM SchoolPeriod WHERE TabId=#{arg0}
+  </select>
+  <!-- 通过名称获取学期 -->
+  <select id="getSchoolPeriodByPeriod" resultType="com.goldeneyes.pojo.SchoolPeriod">
+		SELECT TabId, SchoolId, Period, OrderId, Status
+		FROM SchoolPeriod WHERE SchoolId=#{arg0} AND Period=#{arg1}
+  </select>
+  <!-- 通过排序获取学期 -->
+  <select id="getSchoolPeriodByOrder" resultType="com.goldeneyes.pojo.SchoolPeriod">
+		SELECT TabId, SchoolId, Period, IsCurrent, OrderId, Status
+		FROM SchoolPeriod WHERE SchoolId=#{arg0} AND OrderId=#{arg1}
+  </select>
+  <!-- 编辑学期  -->
+  <update id="setSchoolPeriod" parameterType="com.goldeneyes.pojo.SchoolPeriod">
+		update SchoolPeriod
+		set
+		Period = #{period,jdbcType=VARCHAR},
+		IsCurrent = #{iscurrent,jdbcType=TINYINT},
+      	OrderId = #{orderid,jdbcType=INTEGER},
+		Status = #{status,jdbcType=TINYINT}
+		where
+		tabid = #{tabid,jdbcType=INTEGER}
+  </update>
+  <!-- 获取学期 数量 -->
+  <select id="getPeriodsCnt" resultType="java.lang.Integer">
+		SELECT
+		COUNT(tabid) FROM SchoolPeriod WHERE schoolId=#{schoolId}
+		<choose>
+			<when test="status != -1">
+				and Status=#{status}
+			</when>
+		</choose>
+  </select>
+  <!-- 获取学期 列表  -->
+  <select id="getPeriods" resultType="com.goldeneyes.pojo.SchoolPeriod">
+		select
+		top(#{page_size})
+		TabId, SchoolId, Period, IsCurrent, OrderId, Status
+		from
+		SchoolPeriod
+		where
+		SchoolId=#{schoolId}
+		<choose>
+			<when test="status != -1">
+				and Status=#{status}
+			</when>
+		</choose>
+		and tabid
+		not
+		in
+		(select
+		top((#{page_number}-1) *
+		#{page_size}) tabid
+		from SchoolPeriod
+		where
+		SchoolId=#{schoolId}
+		<choose>
+			<when test="status != -1">
+				and Status=#{status}
+			</when>
+		</choose>
+		order by OrderId)
+		order by OrderId
+	</select>
+	<!-- 设置当前学期  -->
+  	<update id="setchoolPeriodCurrent" parameterType="java.lang.Integer">
+		update SchoolPeriod
+		set IsCurrent = 1
+		where tabid = #{arg0}
+  </update>
+  <!-- 去除当前学期设置 -->
+  	<update id="setchoolPeriodNotCurrent" parameterType="java.lang.String">
+		update SchoolPeriod
+		set IsCurrent = 0
+		where SchoolId=#{arg0}
+  </update>
+  <!-- 获取当前学期 -->
+  <select id="getSchoolPeriodCurrent" resultType="java.lang.Integer">
+		SELECT TabId FROM SchoolPeriod WHERE schoolId=#{schoolId}
+		and IsCurrent = 1
+  </select>
+</mapper>

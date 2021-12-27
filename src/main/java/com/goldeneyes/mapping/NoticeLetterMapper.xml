@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.goldeneyes.IDao.NoticeLetterMapper" >
+  <resultMap id="BaseResultMap" type="com.goldeneyes.pojo.NoticeLetter" >
+    <id column="TabId" property="tabid" jdbcType="INTEGER" />
+    <result column="SchoolId" property="schoolid" jdbcType="VARCHAR" />
+    <result column="LetterType" property="lettertype" jdbcType="TINYINT" />
+    <result column="LetterName" property="lettername" jdbcType="VARCHAR" />
+    <result column="LetterCol" property="lettercol" jdbcType="VARCHAR" />
+    <result column="SendManId" property="sendmanid" jdbcType="BIGINT" />
+    <result column="SendManCode" property="sendmancode" jdbcType="VARCHAR" />
+    <result column="SendManName" property="sendmanname" jdbcType="VARCHAR" />
+    <result column="SendManPic" property="sendmanpic" jdbcType="VARCHAR" />
+    <result column="SendTime" property="sendtime" jdbcType="TIMESTAMP" />
+    <result column="LetterStatus" property="letterstatus" jdbcType="TINYINT" />
+    <result column="IsShow" property="isshow" jdbcType="TINYINT" />
+    <result column="MsgType" property="msgtype" jdbcType="VARCHAR" />
+    <result column="SmsMsgtypeCode" property="smsmsgtypecode" jdbcType="VARCHAR" />
+    <result column="Servied" property="servied" jdbcType="TINYINT" />
+    <result column="HrSmsid" property="hrsmsid" jdbcType="INTEGER" />
+    <result column="IsCheck" property="ischeck" jdbcType="TINYINT" />
+    <result column="CheckTime" property="checktime" jdbcType="TIMESTAMP" />
+    <result column="CheckUser" property="checkuser" jdbcType="VARCHAR" />
+    <result column="CheckUserTname" property="checkusertname" jdbcType="VARCHAR" />
+    <result column="CheckUserUnit" property="checkuserunit" jdbcType="VARCHAR" />
+    <result column="SmsSync" property="smssync" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TabId, SchoolId, LetterType, LetterName, LetterCol, SendManId, SendManCode, SendManName, 
+    SendManPic, SendTime, LetterStatus, IsShow, MsgType, SmsMsgtypeCode, Servied, HrSmsid, 
+    IsCheck, CheckTime, CheckUser, CheckUserTname, CheckUserUnit, SmsSync
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from NoticeLetter
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from NoticeLetter
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.goldeneyes.pojo.NoticeLetter" >
+    insert into NoticeLetter (TabId, SchoolId, LetterType, 
+      LetterName, LetterCol, SendManId, 
+      SendManCode, SendManName, SendManPic, 
+      SendTime, LetterStatus, IsShow, 
+      MsgType, SmsMsgtypeCode, Servied, 
+      HrSmsid, IsCheck, CheckTime, 
+      CheckUser, CheckUserTname, CheckUserUnit, 
+      SmsSync)
+    values (#{tabid,jdbcType=INTEGER}, #{schoolid,jdbcType=VARCHAR}, #{lettertype,jdbcType=TINYINT}, 
+      #{lettername,jdbcType=VARCHAR}, #{lettercol,jdbcType=VARCHAR}, #{sendmanid,jdbcType=BIGINT}, 
+      #{sendmancode,jdbcType=VARCHAR}, #{sendmanname,jdbcType=VARCHAR}, #{sendmanpic,jdbcType=VARCHAR}, 
+      #{sendtime,jdbcType=TIMESTAMP}, #{letterstatus,jdbcType=TINYINT}, #{isshow,jdbcType=TINYINT}, 
+      #{msgtype,jdbcType=VARCHAR}, #{smsmsgtypecode,jdbcType=VARCHAR}, #{servied,jdbcType=TINYINT}, 
+      #{hrsmsid,jdbcType=INTEGER}, #{ischeck,jdbcType=TINYINT}, #{checktime,jdbcType=TIMESTAMP}, 
+      #{checkuser,jdbcType=VARCHAR}, #{checkusertname,jdbcType=VARCHAR}, #{checkuserunit,jdbcType=VARCHAR}, 
+      #{smssync,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.goldeneyes.pojo.NoticeLetter" >
+    insert into NoticeLetter
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        TabId,
+      </if>
+      <if test="schoolid != null" >
+        SchoolId,
+      </if>
+      <if test="lettertype != null" >
+        LetterType,
+      </if>
+      <if test="lettername != null" >
+        LetterName,
+      </if>
+      <if test="lettercol != null" >
+        LetterCol,
+      </if>
+      <if test="sendmanid != null" >
+        SendManId,
+      </if>
+      <if test="sendmancode != null" >
+        SendManCode,
+      </if>
+      <if test="sendmanname != null" >
+        SendManName,
+      </if>
+      <if test="sendmanpic != null" >
+        SendManPic,
+      </if>
+      <if test="sendtime != null" >
+        SendTime,
+      </if>
+      <if test="letterstatus != null" >
+        LetterStatus,
+      </if>
+      <if test="isshow != null" >
+        IsShow,
+      </if>
+      <if test="msgtype != null" >
+        MsgType,
+      </if>
+      <if test="smsmsgtypecode != null" >
+        SmsMsgtypeCode,
+      </if>
+      <if test="servied != null" >
+        Servied,
+      </if>
+      <if test="hrsmsid != null" >
+        HrSmsid,
+      </if>
+      <if test="ischeck != null" >
+        IsCheck,
+      </if>
+      <if test="checktime != null" >
+        CheckTime,
+      </if>
+      <if test="checkuser != null" >
+        CheckUser,
+      </if>
+      <if test="checkusertname != null" >
+        CheckUserTname,
+      </if>
+      <if test="checkuserunit != null" >
+        CheckUserUnit,
+      </if>
+      <if test="smssync != null" >
+        SmsSync,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        #{tabid,jdbcType=INTEGER},
+      </if>
+      <if test="schoolid != null" >
+        #{schoolid,jdbcType=VARCHAR},
+      </if>
+      <if test="lettertype != null" >
+        #{lettertype,jdbcType=TINYINT},
+      </if>
+      <if test="lettername != null" >
+        #{lettername,jdbcType=VARCHAR},
+      </if>
+      <if test="lettercol != null" >
+        #{lettercol,jdbcType=VARCHAR},
+      </if>
+      <if test="sendmanid != null" >
+        #{sendmanid,jdbcType=BIGINT},
+      </if>
+      <if test="sendmancode != null" >
+        #{sendmancode,jdbcType=VARCHAR},
+      </if>
+      <if test="sendmanname != null" >
+        #{sendmanname,jdbcType=VARCHAR},
+      </if>
+      <if test="sendmanpic != null" >
+        #{sendmanpic,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtime != null" >
+        #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="letterstatus != null" >
+        #{letterstatus,jdbcType=TINYINT},
+      </if>
+      <if test="isshow != null" >
+        #{isshow,jdbcType=TINYINT},
+      </if>
+      <if test="msgtype != null" >
+        #{msgtype,jdbcType=VARCHAR},
+      </if>
+      <if test="smsmsgtypecode != null" >
+        #{smsmsgtypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="servied != null" >
+        #{servied,jdbcType=TINYINT},
+      </if>
+      <if test="hrsmsid != null" >
+        #{hrsmsid,jdbcType=INTEGER},
+      </if>
+      <if test="ischeck != null" >
+        #{ischeck,jdbcType=TINYINT},
+      </if>
+      <if test="checktime != null" >
+        #{checktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkuser != null" >
+        #{checkuser,jdbcType=VARCHAR},
+      </if>
+      <if test="checkusertname != null" >
+        #{checkusertname,jdbcType=VARCHAR},
+      </if>
+      <if test="checkuserunit != null" >
+        #{checkuserunit,jdbcType=VARCHAR},
+      </if>
+      <if test="smssync != null" >
+        #{smssync,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.goldeneyes.pojo.NoticeLetter" >
+    update NoticeLetter
+    <set >
+      <if test="schoolid != null" >
+        SchoolId = #{schoolid,jdbcType=VARCHAR},
+      </if>
+      <if test="lettertype != null" >
+        LetterType = #{lettertype,jdbcType=TINYINT},
+      </if>
+      <if test="lettername != null" >
+        LetterName = #{lettername,jdbcType=VARCHAR},
+      </if>
+      <if test="lettercol != null" >
+        LetterCol = #{lettercol,jdbcType=VARCHAR},
+      </if>
+      <if test="sendmanid != null" >
+        SendManId = #{sendmanid,jdbcType=BIGINT},
+      </if>
+      <if test="sendmancode != null" >
+        SendManCode = #{sendmancode,jdbcType=VARCHAR},
+      </if>
+      <if test="sendmanname != null" >
+        SendManName = #{sendmanname,jdbcType=VARCHAR},
+      </if>
+      <if test="sendmanpic != null" >
+        SendManPic = #{sendmanpic,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtime != null" >
+        SendTime = #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="letterstatus != null" >
+        LetterStatus = #{letterstatus,jdbcType=TINYINT},
+      </if>
+      <if test="isshow != null" >
+        IsShow = #{isshow,jdbcType=TINYINT},
+      </if>
+      <if test="msgtype != null" >
+        MsgType = #{msgtype,jdbcType=VARCHAR},
+      </if>
+      <if test="smsmsgtypecode != null" >
+        SmsMsgtypeCode = #{smsmsgtypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="servied != null" >
+        Servied = #{servied,jdbcType=TINYINT},
+      </if>
+      <if test="hrsmsid != null" >
+        HrSmsid = #{hrsmsid,jdbcType=INTEGER},
+      </if>
+      <if test="ischeck != null" >
+        IsCheck = #{ischeck,jdbcType=TINYINT},
+      </if>
+      <if test="checktime != null" >
+        CheckTime = #{checktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkuser != null" >
+        CheckUser = #{checkuser,jdbcType=VARCHAR},
+      </if>
+      <if test="checkusertname != null" >
+        CheckUserTname = #{checkusertname,jdbcType=VARCHAR},
+      </if>
+      <if test="checkuserunit != null" >
+        CheckUserUnit = #{checkuserunit,jdbcType=VARCHAR},
+      </if>
+      <if test="smssync != null" >
+        SmsSync = #{smssync,jdbcType=TINYINT},
+      </if>
+    </set>
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.goldeneyes.pojo.NoticeLetter" >
+    update NoticeLetter
+    set SchoolId = #{schoolid,jdbcType=VARCHAR},
+      LetterType = #{lettertype,jdbcType=TINYINT},
+      LetterName = #{lettername,jdbcType=VARCHAR},
+      LetterCol = #{lettercol,jdbcType=VARCHAR},
+      SendManId = #{sendmanid,jdbcType=BIGINT},
+      SendManCode = #{sendmancode,jdbcType=VARCHAR},
+      SendManName = #{sendmanname,jdbcType=VARCHAR},
+      SendManPic = #{sendmanpic,jdbcType=VARCHAR},
+      SendTime = #{sendtime,jdbcType=TIMESTAMP},
+      LetterStatus = #{letterstatus,jdbcType=TINYINT},
+      IsShow = #{isshow,jdbcType=TINYINT},
+      MsgType = #{msgtype,jdbcType=VARCHAR},
+      SmsMsgtypeCode = #{smsmsgtypecode,jdbcType=VARCHAR},
+      Servied = #{servied,jdbcType=TINYINT},
+      HrSmsid = #{hrsmsid,jdbcType=INTEGER},
+      IsCheck = #{ischeck,jdbcType=TINYINT},
+      CheckTime = #{checktime,jdbcType=TIMESTAMP},
+      CheckUser = #{checkuser,jdbcType=VARCHAR},
+      CheckUserTname = #{checkusertname,jdbcType=VARCHAR},
+      CheckUserUnit = #{checkuserunit,jdbcType=VARCHAR},
+      SmsSync = #{smssync,jdbcType=TINYINT}
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+	<!-- 获取审核的通知单数量 -->
+	<select id="getCheckNoticeLetterCnt" resultType="java.lang.Integer">
+		select COUNT(n.tabid)
+		from NoticeLetter n, NoticeLetterCheck nc
+		where n.TabId = nc.LetterId and n.SchoolId = #{schoolId} and LetterType = #{type}
+		and n.LetterName like '%${name}%'
+		and n.SendTime &gt;= #{beginDate} and n.SendTime &lt;= #{endDate}
+		and n.LetterStatus != 3 and n.IsShow = 1
+		<choose>
+			<when test="status != 0">
+				and nc.CheckStatus = #{status}
+			</when>
+		</choose>
+	</select>
+</mapper>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.goldeneyes.IDao.CheckManSetMapper" >
+  <resultMap id="BaseResultMap" type="com.goldeneyes.pojo.CheckManSet" >
+    <id column="TabId" property="tabid" jdbcType="INTEGER" />
+    <result column="CheckType" property="checktype" jdbcType="INTEGER" />
+    <result column="SchoolId" property="schoolid" jdbcType="VARCHAR" />
+    <result column="CheckManId" property="checkmanid" jdbcType="BIGINT" />
+    <result column="CheckManCode" property="checkmancode" jdbcType="VARCHAR" />
+    <result column="CheckManName" property="checkmanname" jdbcType="VARCHAR" />
+    <result column="CheckManPic" property="checkmanpic" jdbcType="VARCHAR" />
+    <result column="IsCheck" property="ischeck" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TabId, CheckType, SchoolId, CheckManId, CheckManCode, CheckManName, CheckManPic, 
+    IsCheck
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from CheckManSet
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from CheckManSet
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.goldeneyes.pojo.CheckManSet" >
+    insert into CheckManSet (TabId, CheckType, SchoolId, 
+      CheckManId, CheckManCode, CheckManName, 
+      CheckManPic, IsCheck)
+    values (#{tabid,jdbcType=INTEGER}, #{checktype,jdbcType=INTEGER}, #{schoolid,jdbcType=VARCHAR}, 
+      #{checkmanid,jdbcType=BIGINT}, #{checkmancode,jdbcType=VARCHAR}, #{checkmanname,jdbcType=VARCHAR}, 
+      #{checkmanpic,jdbcType=VARCHAR}, #{ischeck,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.goldeneyes.pojo.CheckManSet" >
+    insert into CheckManSet
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        TabId,
+      </if>
+      <if test="checktype != null" >
+        CheckType,
+      </if>
+      <if test="schoolid != null" >
+        SchoolId,
+      </if>
+      <if test="checkmanid != null" >
+        CheckManId,
+      </if>
+      <if test="checkmancode != null" >
+        CheckManCode,
+      </if>
+      <if test="checkmanname != null" >
+        CheckManName,
+      </if>
+      <if test="checkmanpic != null" >
+        CheckManPic,
+      </if>
+      <if test="ischeck != null" >
+        IsCheck,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        #{tabid,jdbcType=INTEGER},
+      </if>
+      <if test="checktype != null" >
+        #{checktype,jdbcType=INTEGER},
+      </if>
+      <if test="schoolid != null" >
+        #{schoolid,jdbcType=VARCHAR},
+      </if>
+      <if test="checkmanid != null" >
+        #{checkmanid,jdbcType=BIGINT},
+      </if>
+      <if test="checkmancode != null" >
+        #{checkmancode,jdbcType=VARCHAR},
+      </if>
+      <if test="checkmanname != null" >
+        #{checkmanname,jdbcType=VARCHAR},
+      </if>
+      <if test="checkmanpic != null" >
+        #{checkmanpic,jdbcType=VARCHAR},
+      </if>
+      <if test="ischeck != null" >
+        #{ischeck,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.goldeneyes.pojo.CheckManSet" >
+    update CheckManSet
+    <set >
+      <if test="checktype != null" >
+        CheckType = #{checktype,jdbcType=INTEGER},
+      </if>
+      <if test="schoolid != null" >
+        SchoolId = #{schoolid,jdbcType=VARCHAR},
+      </if>
+      <if test="checkmanid != null" >
+        CheckManId = #{checkmanid,jdbcType=BIGINT},
+      </if>
+      <if test="checkmancode != null" >
+        CheckManCode = #{checkmancode,jdbcType=VARCHAR},
+      </if>
+      <if test="checkmanname != null" >
+        CheckManName = #{checkmanname,jdbcType=VARCHAR},
+      </if>
+      <if test="checkmanpic != null" >
+        CheckManPic = #{checkmanpic,jdbcType=VARCHAR},
+      </if>
+      <if test="ischeck != null" >
+        IsCheck = #{ischeck,jdbcType=TINYINT},
+      </if>
+    </set>
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.goldeneyes.pojo.CheckManSet" >
+    update CheckManSet
+    set CheckType = #{checktype,jdbcType=INTEGER},
+      SchoolId = #{schoolid,jdbcType=VARCHAR},
+      CheckManId = #{checkmanid,jdbcType=BIGINT},
+      CheckManCode = #{checkmancode,jdbcType=VARCHAR},
+      CheckManName = #{checkmanname,jdbcType=VARCHAR},
+      CheckManPic = #{checkmanpic,jdbcType=VARCHAR},
+      IsCheck = #{ischeck,jdbcType=TINYINT}
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+  <!-- 新增审核人 -->
+  <insert id="addCheckManSet" parameterType="com.goldeneyes.pojo.CheckManSet" 
+		useGeneratedKeys="true" keyProperty="tabid">
+    insert into CheckManSet (CheckType, SchoolId, 
+      CheckManId, CheckManCode, CheckManName, 
+      CheckManPic, IsCheck)
+    values (#{checktype,jdbcType=INTEGER}, #{schoolid,jdbcType=VARCHAR}, 
+      #{checkmanid,jdbcType=BIGINT}, #{checkmancode,jdbcType=VARCHAR}, #{checkmanname,jdbcType=VARCHAR}, 
+      #{checkmanpic,jdbcType=VARCHAR}, #{ischeck,jdbcType=TINYINT})
+  </insert>
+  <!-- 修改审核人 -->
+  <update id="setCheckManSet" parameterType="com.goldeneyes.pojo.CheckManSet" >
+    update CheckManSet
+    set CheckManId = #{checkmanid,jdbcType=BIGINT},
+      CheckManCode = #{checkmancode,jdbcType=VARCHAR},
+      CheckManName = #{checkmanname,jdbcType=VARCHAR},
+      CheckManPic = #{checkmanpic,jdbcType=VARCHAR},
+      IsCheck = #{ischeck,jdbcType=TINYINT}
+    where SchoolId = #{schoolid,jdbcType=VARCHAR} and CheckType = #{checktype,jdbcType=INTEGER}
+  </update>
+  <!-- 获取审核人数量 -->
+  <select id="getCheckManSetCntByCondition" resultType="java.lang.Integer">
+  	select count(TabId) from CheckManSet where SchoolId = #{arg0} and CheckType = #{arg1}
+  </select>
+  <!-- 获取是否审核人 -->
+  <select id="getIsCheckManByCondition" resultType="java.lang.Integer">
+  	select count(TabId) from CheckManSet where SchoolId = #{arg0} and CheckType = #{arg1} and CheckManId = #{arg2}
+  </select>
+  <!-- 获取审核人 -->
+  <select id="getCheckMan" resultType="com.goldeneyes.pojo.CheckManSet">
+  	select TabId, CheckType, SchoolId, 
+      CheckManId, CheckManCode, CheckManName, 
+      CheckManPic, IsCheck 
+    from CheckManSet where SchoolId = #{arg0} and CheckType = #{arg1}
+  </select>
+  <!-- 获取是否需要审核 -->
+  <select id="getIsCheckByType" resultType="java.lang.Integer">
+  	select IsCheck from CheckManSet where SchoolId = #{arg0} and CheckType = #{arg1}
+  </select>
+  <!-- 获取是否需要审核数量 -->
+  <select id="getIsCheckByTypeCnt" resultType="java.lang.Integer">
+  	select Count(TabId) from CheckManSet where SchoolId = #{arg0} and CheckType = #{arg1}
+  </select>
+</mapper>

@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.goldeneyes.IDao.CooperateNoticeMapper" >
+  <resultMap id="BaseResultMap" type="com.goldeneyes.pojo.CooperateNotice" >
+    <id column="TabId" property="tabid" jdbcType="INTEGER" />
+    <result column="SchoolId" property="schoolid" jdbcType="VARCHAR" />
+    <result column="NoticeTitle" property="noticetitle" jdbcType="VARCHAR" />
+    <result column="Tag" property="tag" jdbcType="VARCHAR" />
+    <result column="NoticeEncName" property="noticeencname" jdbcType="VARCHAR" />
+    <result column="NoticeEncAddr" property="noticeencaddr" jdbcType="VARCHAR" />
+    <result column="SmsSync" property="smssync" jdbcType="TINYINT" />
+    <result column="SendManId" property="sendmanid" jdbcType="BIGINT" />
+    <result column="SendManCode" property="sendmancode" jdbcType="VARCHAR" />
+    <result column="SendManName" property="sendmanname" jdbcType="VARCHAR" />
+    <result column="SendManPic" property="sendmanpic" jdbcType="VARCHAR" />
+    <result column="SendTime" property="sendtime" jdbcType="TIMESTAMP" />
+    <result column="ReadTime" property="readtime" jdbcType="TIMESTAMP" />
+    <result column="DoneCnt" property="donecnt" jdbcType="INTEGER" />
+    <result column="SendCnt" property="sendcnt" jdbcType="INTEGER" />
+    <result column="LastReplyTime" property="lastreplytime" jdbcType="TIMESTAMP" />
+    <result column="Progress" property="progress" jdbcType="TINYINT" />
+    <result column="Status" property="status" jdbcType="TINYINT" />
+    <result column="LastReceiveManId" property="lastreceivemanid" jdbcType="BIGINT" />
+    <result column="IsShow" property="isshow" jdbcType="TINYINT" />
+    <result column="MsgType" property="msgtype" jdbcType="VARCHAR" />
+    <result column="SmsMsgtypeCode" property="smsmsgtypecode" jdbcType="VARCHAR" />
+    <result column="Servied" property="servied" jdbcType="TINYINT" />
+    <result column="HrSmsid" property="hrsmsid" jdbcType="INTEGER" />
+    <result column="IsCheck" property="ischeck" jdbcType="TINYINT" />
+    <result column="CheckTime" property="checktime" jdbcType="TIMESTAMP" />
+    <result column="CheckUser" property="checkuser" jdbcType="VARCHAR" />
+    <result column="CheckUserTname" property="checkusertname" jdbcType="VARCHAR" />
+    <result column="CheckUserUnit" property="checkuserunit" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.goldeneyes.pojo.CooperateNotice" extends="BaseResultMap" >
+    <result column="NoticeContent" property="noticecontent" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TabId, SchoolId, NoticeTitle, Tag, NoticeEncName, NoticeEncAddr, SmsSync, SendManId, 
+    SendManCode, SendManName, SendManPic, SendTime, ReadTime, DoneCnt, SendCnt, LastReplyTime, 
+    Progress, Status, LastReceiveManId, IsShow, MsgType, SmsMsgtypeCode, Servied, HrSmsid, 
+    IsCheck, CheckTime, CheckUser, CheckUserTname, CheckUserUnit
+  </sql>
+  <sql id="Blob_Column_List" >
+    NoticeContent
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from CooperateNotice
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from CooperateNotice
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.goldeneyes.pojo.CooperateNotice" >
+    insert into CooperateNotice (TabId, SchoolId, NoticeTitle, 
+      Tag, NoticeEncName, NoticeEncAddr, 
+      SmsSync, SendManId, SendManCode, 
+      SendManName, SendManPic, SendTime, 
+      ReadTime, DoneCnt, SendCnt, 
+      LastReplyTime, Progress, Status, 
+      LastReceiveManId, IsShow, MsgType, 
+      SmsMsgtypeCode, Servied, HrSmsid, 
+      IsCheck, CheckTime, CheckUser, 
+      CheckUserTname, CheckUserUnit, NoticeContent
+      )
+    values (#{tabid,jdbcType=INTEGER}, #{schoolid,jdbcType=VARCHAR}, #{noticetitle,jdbcType=VARCHAR}, 
+      #{tag,jdbcType=VARCHAR}, #{noticeencname,jdbcType=VARCHAR}, #{noticeencaddr,jdbcType=VARCHAR}, 
+      #{smssync,jdbcType=TINYINT}, #{sendmanid,jdbcType=BIGINT}, #{sendmancode,jdbcType=VARCHAR}, 
+      #{sendmanname,jdbcType=VARCHAR}, #{sendmanpic,jdbcType=VARCHAR}, #{sendtime,jdbcType=TIMESTAMP}, 
+      #{readtime,jdbcType=TIMESTAMP}, #{donecnt,jdbcType=INTEGER}, #{sendcnt,jdbcType=INTEGER}, 
+      #{lastreplytime,jdbcType=TIMESTAMP}, #{progress,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, 
+      #{lastreceivemanid,jdbcType=BIGINT}, #{isshow,jdbcType=TINYINT}, #{msgtype,jdbcType=VARCHAR}, 
+      #{smsmsgtypecode,jdbcType=VARCHAR}, #{servied,jdbcType=TINYINT}, #{hrsmsid,jdbcType=INTEGER}, 
+      #{ischeck,jdbcType=TINYINT}, #{checktime,jdbcType=TIMESTAMP}, #{checkuser,jdbcType=VARCHAR}, 
+      #{checkusertname,jdbcType=VARCHAR}, #{checkuserunit,jdbcType=VARCHAR}, #{noticecontent,jdbcType=CLOB}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.goldeneyes.pojo.CooperateNotice" >
+    insert into CooperateNotice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        TabId,
+      </if>
+      <if test="schoolid != null" >
+        SchoolId,
+      </if>
+      <if test="noticetitle != null" >
+        NoticeTitle,
+      </if>
+      <if test="tag != null" >
+        Tag,
+      </if>
+      <if test="noticeencname != null" >
+        NoticeEncName,
+      </if>
+      <if test="noticeencaddr != null" >
+        NoticeEncAddr,
+      </if>
+      <if test="smssync != null" >
+        SmsSync,
+      </if>
+      <if test="sendmanid != null" >
+        SendManId,
+      </if>
+      <if test="sendmancode != null" >
+        SendManCode,
+      </if>
+      <if test="sendmanname != null" >
+        SendManName,
+      </if>
+      <if test="sendmanpic != null" >
+        SendManPic,
+      </if>
+      <if test="sendtime != null" >
+        SendTime,
+      </if>
+      <if test="readtime != null" >
+        ReadTime,
+      </if>
+      <if test="donecnt != null" >
+        DoneCnt,
+      </if>
+      <if test="sendcnt != null" >
+        SendCnt,
+      </if>
+      <if test="lastreplytime != null" >
+        LastReplyTime,
+      </if>
+      <if test="progress != null" >
+        Progress,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+      <if test="lastreceivemanid != null" >
+        LastReceiveManId,
+      </if>
+      <if test="isshow != null" >
+        IsShow,
+      </if>
+      <if test="msgtype != null" >
+        MsgType,
+      </if>
+      <if test="smsmsgtypecode != null" >
+        SmsMsgtypeCode,
+      </if>
+      <if test="servied != null" >
+        Servied,
+      </if>
+      <if test="hrsmsid != null" >
+        HrSmsid,
+      </if>
+      <if test="ischeck != null" >
+        IsCheck,
+      </if>
+      <if test="checktime != null" >
+        CheckTime,
+      </if>
+      <if test="checkuser != null" >
+        CheckUser,
+      </if>
+      <if test="checkusertname != null" >
+        CheckUserTname,
+      </if>
+      <if test="checkuserunit != null" >
+        CheckUserUnit,
+      </if>
+      <if test="noticecontent != null" >
+        NoticeContent,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        #{tabid,jdbcType=INTEGER},
+      </if>
+      <if test="schoolid != null" >
+        #{schoolid,jdbcType=VARCHAR},
+      </if>
+      <if test="noticetitle != null" >
+        #{noticetitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeencname != null" >
+        #{noticeencname,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeencaddr != null" >
+        #{noticeencaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="smssync != null" >
+        #{smssync,jdbcType=TINYINT},
+      </if>
+      <if test="sendmanid != null" >
+        #{sendmanid,jdbcType=BIGINT},
+      </if>
+      <if test="sendmancode != null" >
+        #{sendmancode,jdbcType=VARCHAR},
+      </if>
+      <if test="sendmanname != null" >
+        #{sendmanname,jdbcType=VARCHAR},
+      </if>
+      <if test="sendmanpic != null" >
+        #{sendmanpic,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtime != null" >
+        #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readtime != null" >
+        #{readtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="donecnt != null" >
+        #{donecnt,jdbcType=INTEGER},
+      </if>
+      <if test="sendcnt != null" >
+        #{sendcnt,jdbcType=INTEGER},
+      </if>
+      <if test="lastreplytime != null" >
+        #{lastreplytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="progress != null" >
+        #{progress,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="lastreceivemanid != null" >
+        #{lastreceivemanid,jdbcType=BIGINT},
+      </if>
+      <if test="isshow != null" >
+        #{isshow,jdbcType=TINYINT},
+      </if>
+      <if test="msgtype != null" >
+        #{msgtype,jdbcType=VARCHAR},
+      </if>
+      <if test="smsmsgtypecode != null" >
+        #{smsmsgtypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="servied != null" >
+        #{servied,jdbcType=TINYINT},
+      </if>
+      <if test="hrsmsid != null" >
+        #{hrsmsid,jdbcType=INTEGER},
+      </if>
+      <if test="ischeck != null" >
+        #{ischeck,jdbcType=TINYINT},
+      </if>
+      <if test="checktime != null" >
+        #{checktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkuser != null" >
+        #{checkuser,jdbcType=VARCHAR},
+      </if>
+      <if test="checkusertname != null" >
+        #{checkusertname,jdbcType=VARCHAR},
+      </if>
+      <if test="checkuserunit != null" >
+        #{checkuserunit,jdbcType=VARCHAR},
+      </if>
+      <if test="noticecontent != null" >
+        #{noticecontent,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.goldeneyes.pojo.CooperateNotice" >
+    update CooperateNotice
+    <set >
+      <if test="schoolid != null" >
+        SchoolId = #{schoolid,jdbcType=VARCHAR},
+      </if>
+      <if test="noticetitle != null" >
+        NoticeTitle = #{noticetitle,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        Tag = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeencname != null" >
+        NoticeEncName = #{noticeencname,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeencaddr != null" >
+        NoticeEncAddr = #{noticeencaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="smssync != null" >
+        SmsSync = #{smssync,jdbcType=TINYINT},
+      </if>
+      <if test="sendmanid != null" >
+        SendManId = #{sendmanid,jdbcType=BIGINT},
+      </if>
+      <if test="sendmancode != null" >
+        SendManCode = #{sendmancode,jdbcType=VARCHAR},
+      </if>
+      <if test="sendmanname != null" >
+        SendManName = #{sendmanname,jdbcType=VARCHAR},
+      </if>
+      <if test="sendmanpic != null" >
+        SendManPic = #{sendmanpic,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtime != null" >
+        SendTime = #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readtime != null" >
+        ReadTime = #{readtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="donecnt != null" >
+        DoneCnt = #{donecnt,jdbcType=INTEGER},
+      </if>
+      <if test="sendcnt != null" >
+        SendCnt = #{sendcnt,jdbcType=INTEGER},
+      </if>
+      <if test="lastreplytime != null" >
+        LastReplyTime = #{lastreplytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="progress != null" >
+        Progress = #{progress,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="lastreceivemanid != null" >
+        LastReceiveManId = #{lastreceivemanid,jdbcType=BIGINT},
+      </if>
+      <if test="isshow != null" >
+        IsShow = #{isshow,jdbcType=TINYINT},
+      </if>
+      <if test="msgtype != null" >
+        MsgType = #{msgtype,jdbcType=VARCHAR},
+      </if>
+      <if test="smsmsgtypecode != null" >
+        SmsMsgtypeCode = #{smsmsgtypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="servied != null" >
+        Servied = #{servied,jdbcType=TINYINT},
+      </if>
+      <if test="hrsmsid != null" >
+        HrSmsid = #{hrsmsid,jdbcType=INTEGER},
+      </if>
+      <if test="ischeck != null" >
+        IsCheck = #{ischeck,jdbcType=TINYINT},
+      </if>
+      <if test="checktime != null" >
+        CheckTime = #{checktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkuser != null" >
+        CheckUser = #{checkuser,jdbcType=VARCHAR},
+      </if>
+      <if test="checkusertname != null" >
+        CheckUserTname = #{checkusertname,jdbcType=VARCHAR},
+      </if>
+      <if test="checkuserunit != null" >
+        CheckUserUnit = #{checkuserunit,jdbcType=VARCHAR},
+      </if>
+      <if test="noticecontent != null" >
+        NoticeContent = #{noticecontent,jdbcType=CLOB},
+      </if>
+    </set>
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.goldeneyes.pojo.CooperateNotice" >
+    update CooperateNotice
+    set SchoolId = #{schoolid,jdbcType=VARCHAR},
+      NoticeTitle = #{noticetitle,jdbcType=VARCHAR},
+      Tag = #{tag,jdbcType=VARCHAR},
+      NoticeEncName = #{noticeencname,jdbcType=VARCHAR},
+      NoticeEncAddr = #{noticeencaddr,jdbcType=VARCHAR},
+      SmsSync = #{smssync,jdbcType=TINYINT},
+      SendManId = #{sendmanid,jdbcType=BIGINT},
+      SendManCode = #{sendmancode,jdbcType=VARCHAR},
+      SendManName = #{sendmanname,jdbcType=VARCHAR},
+      SendManPic = #{sendmanpic,jdbcType=VARCHAR},
+      SendTime = #{sendtime,jdbcType=TIMESTAMP},
+      ReadTime = #{readtime,jdbcType=TIMESTAMP},
+      DoneCnt = #{donecnt,jdbcType=INTEGER},
+      SendCnt = #{sendcnt,jdbcType=INTEGER},
+      LastReplyTime = #{lastreplytime,jdbcType=TIMESTAMP},
+      Progress = #{progress,jdbcType=TINYINT},
+      Status = #{status,jdbcType=TINYINT},
+      LastReceiveManId = #{lastreceivemanid,jdbcType=BIGINT},
+      IsShow = #{isshow,jdbcType=TINYINT},
+      MsgType = #{msgtype,jdbcType=VARCHAR},
+      SmsMsgtypeCode = #{smsmsgtypecode,jdbcType=VARCHAR},
+      Servied = #{servied,jdbcType=TINYINT},
+      HrSmsid = #{hrsmsid,jdbcType=INTEGER},
+      IsCheck = #{ischeck,jdbcType=TINYINT},
+      CheckTime = #{checktime,jdbcType=TIMESTAMP},
+      CheckUser = #{checkuser,jdbcType=VARCHAR},
+      CheckUserTname = #{checkusertname,jdbcType=VARCHAR},
+      CheckUserUnit = #{checkuserunit,jdbcType=VARCHAR},
+      NoticeContent = #{noticecontent,jdbcType=CLOB}
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.goldeneyes.pojo.CooperateNotice" >
+    update CooperateNotice
+    set SchoolId = #{schoolid,jdbcType=VARCHAR},
+      NoticeTitle = #{noticetitle,jdbcType=VARCHAR},
+      Tag = #{tag,jdbcType=VARCHAR},
+      NoticeEncName = #{noticeencname,jdbcType=VARCHAR},
+      NoticeEncAddr = #{noticeencaddr,jdbcType=VARCHAR},
+      SmsSync = #{smssync,jdbcType=TINYINT},
+      SendManId = #{sendmanid,jdbcType=BIGINT},
+      SendManCode = #{sendmancode,jdbcType=VARCHAR},
+      SendManName = #{sendmanname,jdbcType=VARCHAR},
+      SendManPic = #{sendmanpic,jdbcType=VARCHAR},
+      SendTime = #{sendtime,jdbcType=TIMESTAMP},
+      ReadTime = #{readtime,jdbcType=TIMESTAMP},
+      DoneCnt = #{donecnt,jdbcType=INTEGER},
+      SendCnt = #{sendcnt,jdbcType=INTEGER},
+      LastReplyTime = #{lastreplytime,jdbcType=TIMESTAMP},
+      Progress = #{progress,jdbcType=TINYINT},
+      Status = #{status,jdbcType=TINYINT},
+      LastReceiveManId = #{lastreceivemanid,jdbcType=BIGINT},
+      IsShow = #{isshow,jdbcType=TINYINT},
+      MsgType = #{msgtype,jdbcType=VARCHAR},
+      SmsMsgtypeCode = #{smsmsgtypecode,jdbcType=VARCHAR},
+      Servied = #{servied,jdbcType=TINYINT},
+      HrSmsid = #{hrsmsid,jdbcType=INTEGER},
+      IsCheck = #{ischeck,jdbcType=TINYINT},
+      CheckTime = #{checktime,jdbcType=TIMESTAMP},
+      CheckUser = #{checkuser,jdbcType=VARCHAR},
+      CheckUserTname = #{checkusertname,jdbcType=VARCHAR},
+      CheckUserUnit = #{checkuserunit,jdbcType=VARCHAR}
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+</mapper>

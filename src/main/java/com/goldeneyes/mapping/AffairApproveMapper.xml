@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.goldeneyes.IDao.AffairApproveMapper" >
+  <resultMap id="BaseResultMap" type="com.goldeneyes.pojo.AffairApprove" >
+    <id column="TabId" property="tabid" jdbcType="INTEGER" />
+    <result column="ApplyId" property="applyid" jdbcType="INTEGER" />
+    <result column="Tag" property="tag" jdbcType="VARCHAR" />
+    <result column="UpperId" property="upperid" jdbcType="INTEGER" />
+    <result column="ApproveManId" property="approvemanid" jdbcType="BIGINT" />
+    <result column="ApproveManCode" property="approvemancode" jdbcType="VARCHAR" />
+    <result column="ApproveManName" property="approvemanname" jdbcType="VARCHAR" />
+    <result column="ApproveManPic" property="approvemanpic" jdbcType="VARCHAR" />
+    <result column="ApproveContent" property="approvecontent" jdbcType="VARCHAR" />
+    <result column="ApproveTime" property="approvetime" jdbcType="TIMESTAMP" />
+    <result column="Status" property="status" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TabId, ApplyId, Tag, UpperId, ApproveManId, ApproveManCode, ApproveManName, ApproveManPic, 
+    ApproveContent, ApproveTime, Status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from AffairApprove
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from AffairApprove
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.goldeneyes.pojo.AffairApprove" >
+    insert into AffairApprove (TabId, ApplyId, Tag, 
+      UpperId, ApproveManId, ApproveManCode, 
+      ApproveManName, ApproveManPic, ApproveContent, 
+      ApproveTime, Status)
+    values (#{tabid,jdbcType=INTEGER}, #{applyid,jdbcType=INTEGER}, #{tag,jdbcType=VARCHAR}, 
+      #{upperid,jdbcType=INTEGER}, #{approvemanid,jdbcType=BIGINT}, #{approvemancode,jdbcType=VARCHAR}, 
+      #{approvemanname,jdbcType=VARCHAR}, #{approvemanpic,jdbcType=VARCHAR}, #{approvecontent,jdbcType=VARCHAR}, 
+      #{approvetime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.goldeneyes.pojo.AffairApprove" >
+    insert into AffairApprove
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        TabId,
+      </if>
+      <if test="applyid != null" >
+        ApplyId,
+      </if>
+      <if test="tag != null" >
+        Tag,
+      </if>
+      <if test="upperid != null" >
+        UpperId,
+      </if>
+      <if test="approvemanid != null" >
+        ApproveManId,
+      </if>
+      <if test="approvemancode != null" >
+        ApproveManCode,
+      </if>
+      <if test="approvemanname != null" >
+        ApproveManName,
+      </if>
+      <if test="approvemanpic != null" >
+        ApproveManPic,
+      </if>
+      <if test="approvecontent != null" >
+        ApproveContent,
+      </if>
+      <if test="approvetime != null" >
+        ApproveTime,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        #{tabid,jdbcType=INTEGER},
+      </if>
+      <if test="applyid != null" >
+        #{applyid,jdbcType=INTEGER},
+      </if>
+      <if test="tag != null" >
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="upperid != null" >
+        #{upperid,jdbcType=INTEGER},
+      </if>
+      <if test="approvemanid != null" >
+        #{approvemanid,jdbcType=BIGINT},
+      </if>
+      <if test="approvemancode != null" >
+        #{approvemancode,jdbcType=VARCHAR},
+      </if>
+      <if test="approvemanname != null" >
+        #{approvemanname,jdbcType=VARCHAR},
+      </if>
+      <if test="approvemanpic != null" >
+        #{approvemanpic,jdbcType=VARCHAR},
+      </if>
+      <if test="approvecontent != null" >
+        #{approvecontent,jdbcType=VARCHAR},
+      </if>
+      <if test="approvetime != null" >
+        #{approvetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.goldeneyes.pojo.AffairApprove" >
+    update AffairApprove
+    <set >
+      <if test="applyid != null" >
+        ApplyId = #{applyid,jdbcType=INTEGER},
+      </if>
+      <if test="tag != null" >
+        Tag = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="upperid != null" >
+        UpperId = #{upperid,jdbcType=INTEGER},
+      </if>
+      <if test="approvemanid != null" >
+        ApproveManId = #{approvemanid,jdbcType=BIGINT},
+      </if>
+      <if test="approvemancode != null" >
+        ApproveManCode = #{approvemancode,jdbcType=VARCHAR},
+      </if>
+      <if test="approvemanname != null" >
+        ApproveManName = #{approvemanname,jdbcType=VARCHAR},
+      </if>
+      <if test="approvemanpic != null" >
+        ApproveManPic = #{approvemanpic,jdbcType=VARCHAR},
+      </if>
+      <if test="approvecontent != null" >
+        ApproveContent = #{approvecontent,jdbcType=VARCHAR},
+      </if>
+      <if test="approvetime != null" >
+        ApproveTime = #{approvetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.goldeneyes.pojo.AffairApprove" >
+    update AffairApprove
+    set ApplyId = #{applyid,jdbcType=INTEGER},
+      Tag = #{tag,jdbcType=VARCHAR},
+      UpperId = #{upperid,jdbcType=INTEGER},
+      ApproveManId = #{approvemanid,jdbcType=BIGINT},
+      ApproveManCode = #{approvemancode,jdbcType=VARCHAR},
+      ApproveManName = #{approvemanname,jdbcType=VARCHAR},
+      ApproveManPic = #{approvemanpic,jdbcType=VARCHAR},
+      ApproveContent = #{approvecontent,jdbcType=VARCHAR},
+      ApproveTime = #{approvetime,jdbcType=TIMESTAMP},
+      Status = #{status,jdbcType=TINYINT}
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+	<!-- 获取未审批数量 -->
+	<select id="getNoApproveCntByMan" resultType="java.lang.Integer">
+		select COUNT(apr.tabid)
+		from AffairApply apl,AffairApprove apr
+		where apl.tabid = apr.ApplyId and apl.SchoolId = #{arg0} 
+		and apr.ApproveManId = #{arg1}
+		and apr.Status = 2 and apl.Status = 1 and apl.IsShow = 1
+	</select>
+</mapper>

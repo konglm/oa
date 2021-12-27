@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.goldeneyes.IDao.SchoolPicMapper" >
+  <resultMap id="BaseResultMap" type="com.goldeneyes.pojo.SchoolPic" >
+    <id column="TabId" property="tabid" jdbcType="INTEGER" />
+    <result column="SchoolId" property="schoolid" jdbcType="VARCHAR" />
+    <result column="PicAddr" property="picaddr" jdbcType="VARCHAR" />
+    <result column="OrderId" property="orderid" jdbcType="INTEGER" />
+    <result column="Status" property="status" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TabId, SchoolId, PicAddr, OrderId, Status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from SchoolPic
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from SchoolPic
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.goldeneyes.pojo.SchoolPic" >
+    insert into SchoolPic (TabId, SchoolId, PicAddr, 
+      OrderId, Status)
+    values (#{tabid,jdbcType=INTEGER}, #{schoolid,jdbcType=VARCHAR}, #{picaddr,jdbcType=VARCHAR}, 
+      #{orderid,jdbcType=INTEGER}, #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.goldeneyes.pojo.SchoolPic" >
+    insert into SchoolPic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        TabId,
+      </if>
+      <if test="schoolid != null" >
+        SchoolId,
+      </if>
+      <if test="picaddr != null" >
+        PicAddr,
+      </if>
+      <if test="orderid != null" >
+        OrderId,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        #{tabid,jdbcType=INTEGER},
+      </if>
+      <if test="schoolid != null" >
+        #{schoolid,jdbcType=VARCHAR},
+      </if>
+      <if test="picaddr != null" >
+        #{picaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="orderid != null" >
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.goldeneyes.pojo.SchoolPic" >
+    update SchoolPic
+    <set >
+      <if test="schoolid != null" >
+        SchoolId = #{schoolid,jdbcType=VARCHAR},
+      </if>
+      <if test="picaddr != null" >
+        PicAddr = #{picaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="orderid != null" >
+        OrderId = #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.goldeneyes.pojo.SchoolPic" >
+    update SchoolPic
+    set SchoolId = #{schoolid,jdbcType=VARCHAR},
+      PicAddr = #{picaddr,jdbcType=VARCHAR},
+      OrderId = #{orderid,jdbcType=INTEGER},
+      Status = #{status,jdbcType=TINYINT}
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+  <!-- 判断有无首页图片 -->
+  <select id="getSchoolPicCntBySchool" resultType="java.lang.Integer">
+		SELECT
+		COUNT(TabId) FROM SchoolPic WHERE SchoolId=#{arg0}
+  </select>
+  <!-- 新增首页图片 -->
+  <insert id="addSchoolPic" parameterType="com.goldeneyes.pojo.SchoolPic" 
+		useGeneratedKeys="true" keyProperty="tabid">
+    insert into SchoolPic (SchoolId, PicAddr, 
+      OrderId, Status)
+    values (#{schoolid,jdbcType=VARCHAR}, #{picaddr,jdbcType=VARCHAR}, 
+      #{orderid,jdbcType=INTEGER}, #{status,jdbcType=TINYINT})
+  </insert> 
+  <!-- 修改首页图片 -->
+  <update id="setSchoolPic" parameterType="com.goldeneyes.pojo.SchoolPic">
+		update SchoolPic
+		set
+      	PicAddr = #{picaddr,jdbcType=VARCHAR},
+      	OrderId = #{orderid,jdbcType=INTEGER},
+     	Status = #{status,jdbcType=TINYINT}
+		where
+		SchoolId = #{schoolid,jdbcType=VARCHAR}
+  </update>
+  <!-- 获取首页图片  -->
+  <select id="getSchoolPic" resultType="com.goldeneyes.pojo.SchoolPic">
+		select TabId, SchoolId, PicAddr, OrderId, Status
+		from SchoolPic where SchoolId=#{arg0}
+	</select>
+</mapper>

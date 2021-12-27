@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.goldeneyes.IDao.SchoolCalendarCheckMapper" >
+  <resultMap id="BaseResultMap" type="com.goldeneyes.pojo.SchoolCalendarCheck" >
+    <id column="TabId" property="tabid" jdbcType="INTEGER" />
+    <result column="SchoolCalendarId" property="schoolcalendarid" jdbcType="INTEGER" />
+    <result column="CheckTime" property="checktime" jdbcType="TIMESTAMP" />
+    <result column="CheckContent" property="checkcontent" jdbcType="VARCHAR" />
+    <result column="CheckStatus" property="checkstatus" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TabId, SchoolCalendarId, CheckTime, CheckContent, CheckStatus
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from SchoolCalendarCheck
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from SchoolCalendarCheck
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.goldeneyes.pojo.SchoolCalendarCheck" >
+    insert into SchoolCalendarCheck (TabId, SchoolCalendarId, CheckTime, 
+      CheckContent, CheckStatus)
+    values (#{tabid,jdbcType=INTEGER}, #{schoolcalendarid,jdbcType=INTEGER}, #{checktime,jdbcType=TIMESTAMP}, 
+      #{checkcontent,jdbcType=VARCHAR}, #{checkstatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.goldeneyes.pojo.SchoolCalendarCheck" >
+    insert into SchoolCalendarCheck
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        TabId,
+      </if>
+      <if test="schoolcalendarid != null" >
+        SchoolCalendarId,
+      </if>
+      <if test="checktime != null" >
+        CheckTime,
+      </if>
+      <if test="checkcontent != null" >
+        CheckContent,
+      </if>
+      <if test="checkstatus != null" >
+        CheckStatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        #{tabid,jdbcType=INTEGER},
+      </if>
+      <if test="schoolcalendarid != null" >
+        #{schoolcalendarid,jdbcType=INTEGER},
+      </if>
+      <if test="checktime != null" >
+        #{checktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkcontent != null" >
+        #{checkcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="checkstatus != null" >
+        #{checkstatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.goldeneyes.pojo.SchoolCalendarCheck" >
+    update SchoolCalendarCheck
+    <set >
+      <if test="schoolcalendarid != null" >
+        SchoolCalendarId = #{schoolcalendarid,jdbcType=INTEGER},
+      </if>
+      <if test="checktime != null" >
+        CheckTime = #{checktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkcontent != null" >
+        CheckContent = #{checkcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="checkstatus != null" >
+        CheckStatus = #{checkstatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.goldeneyes.pojo.SchoolCalendarCheck" >
+    update SchoolCalendarCheck
+    set SchoolCalendarId = #{schoolcalendarid,jdbcType=INTEGER},
+      CheckTime = #{checktime,jdbcType=TIMESTAMP},
+      CheckContent = #{checkcontent,jdbcType=VARCHAR},
+      CheckStatus = #{checkstatus,jdbcType=TINYINT}
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+</mapper>

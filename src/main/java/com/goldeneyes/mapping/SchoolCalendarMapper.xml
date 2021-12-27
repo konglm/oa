@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.goldeneyes.IDao.SchoolCalendarMapper" >
+  <resultMap id="BaseResultMap" type="com.goldeneyes.pojo.SchoolCalendar" >
+    <id column="TabId" property="tabid" jdbcType="INTEGER" />
+    <result column="SchoolId" property="schoolid" jdbcType="VARCHAR" />
+    <result column="YearId" property="yearid" jdbcType="VARCHAR" />
+    <result column="PeriodId" property="periodid" jdbcType="VARCHAR" />
+    <result column="PeriodName" property="periodname" jdbcType="VARCHAR" />
+    <result column="LastTitle" property="lasttitle" jdbcType="VARCHAR" />
+    <result column="Title" property="title" jdbcType="VARCHAR" />
+    <result column="Tag" property="tag" jdbcType="VARCHAR" />
+    <result column="CalendarAddr" property="calendaraddr" jdbcType="VARCHAR" />
+    <result column="SendManId" property="sendmanid" jdbcType="BIGINT" />
+    <result column="SendManCode" property="sendmancode" jdbcType="VARCHAR" />
+    <result column="SendManName" property="sendmanname" jdbcType="VARCHAR" />
+    <result column="SendManPic" property="sendmanpic" jdbcType="VARCHAR" />
+    <result column="SendTime" property="sendtime" jdbcType="TIMESTAMP" />
+    <result column="Status" property="status" jdbcType="TINYINT" />
+    <result column="IsShow" property="isshow" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TabId, SchoolId, YearId, PeriodId, PeriodName, LastTitle, Title, Tag, CalendarAddr, 
+    SendManId, SendManCode, SendManName, SendManPic, SendTime, Status, IsShow
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from SchoolCalendar
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from SchoolCalendar
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.goldeneyes.pojo.SchoolCalendar" >
+    insert into SchoolCalendar (TabId, SchoolId, YearId, 
+      PeriodId, PeriodName, LastTitle, 
+      Title, Tag, CalendarAddr, 
+      SendManId, SendManCode, SendManName, 
+      SendManPic, SendTime, Status, 
+      IsShow)
+    values (#{tabid,jdbcType=INTEGER}, #{schoolid,jdbcType=VARCHAR}, #{yearid,jdbcType=VARCHAR}, 
+      #{periodid,jdbcType=VARCHAR}, #{periodname,jdbcType=VARCHAR}, #{lasttitle,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR}, #{calendaraddr,jdbcType=VARCHAR}, 
+      #{sendmanid,jdbcType=BIGINT}, #{sendmancode,jdbcType=VARCHAR}, #{sendmanname,jdbcType=VARCHAR}, 
+      #{sendmanpic,jdbcType=VARCHAR}, #{sendtime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, 
+      #{isshow,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.goldeneyes.pojo.SchoolCalendar" >
+    insert into SchoolCalendar
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        TabId,
+      </if>
+      <if test="schoolid != null" >
+        SchoolId,
+      </if>
+      <if test="yearid != null" >
+        YearId,
+      </if>
+      <if test="periodid != null" >
+        PeriodId,
+      </if>
+      <if test="periodname != null" >
+        PeriodName,
+      </if>
+      <if test="lasttitle != null" >
+        LastTitle,
+      </if>
+      <if test="title != null" >
+        Title,
+      </if>
+      <if test="tag != null" >
+        Tag,
+      </if>
+      <if test="calendaraddr != null" >
+        CalendarAddr,
+      </if>
+      <if test="sendmanid != null" >
+        SendManId,
+      </if>
+      <if test="sendmancode != null" >
+        SendManCode,
+      </if>
+      <if test="sendmanname != null" >
+        SendManName,
+      </if>
+      <if test="sendmanpic != null" >
+        SendManPic,
+      </if>
+      <if test="sendtime != null" >
+        SendTime,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+      <if test="isshow != null" >
+        IsShow,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tabid != null" >
+        #{tabid,jdbcType=INTEGER},
+      </if>
+      <if test="schoolid != null" >
+        #{schoolid,jdbcType=VARCHAR},
+      </if>
+      <if test="yearid != null" >
+        #{yearid,jdbcType=VARCHAR},
+      </if>
+      <if test="periodid != null" >
+        #{periodid,jdbcType=VARCHAR},
+      </if>
+      <if test="periodname != null" >
+        #{periodname,jdbcType=VARCHAR},
+      </if>
+      <if test="lasttitle != null" >
+        #{lasttitle,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="calendaraddr != null" >
+        #{calendaraddr,jdbcType=VARCHAR},
+      </if>
+      <if test="sendmanid != null" >
+        #{sendmanid,jdbcType=BIGINT},
+      </if>
+      <if test="sendmancode != null" >
+        #{sendmancode,jdbcType=VARCHAR},
+      </if>
+      <if test="sendmanname != null" >
+        #{sendmanname,jdbcType=VARCHAR},
+      </if>
+      <if test="sendmanpic != null" >
+        #{sendmanpic,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtime != null" >
+        #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="isshow != null" >
+        #{isshow,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.goldeneyes.pojo.SchoolCalendar" >
+    update SchoolCalendar
+    <set >
+      <if test="schoolid != null" >
+        SchoolId = #{schoolid,jdbcType=VARCHAR},
+      </if>
+      <if test="yearid != null" >
+        YearId = #{yearid,jdbcType=VARCHAR},
+      </if>
+      <if test="periodid != null" >
+        PeriodId = #{periodid,jdbcType=VARCHAR},
+      </if>
+      <if test="periodname != null" >
+        PeriodName = #{periodname,jdbcType=VARCHAR},
+      </if>
+      <if test="lasttitle != null" >
+        LastTitle = #{lasttitle,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        Title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="tag != null" >
+        Tag = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="calendaraddr != null" >
+        CalendarAddr = #{calendaraddr,jdbcType=VARCHAR},
+      </if>
+      <if test="sendmanid != null" >
+        SendManId = #{sendmanid,jdbcType=BIGINT},
+      </if>
+      <if test="sendmancode != null" >
+        SendManCode = #{sendmancode,jdbcType=VARCHAR},
+      </if>
+      <if test="sendmanname != null" >
+        SendManName = #{sendmanname,jdbcType=VARCHAR},
+      </if>
+      <if test="sendmanpic != null" >
+        SendManPic = #{sendmanpic,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtime != null" >
+        SendTime = #{sendtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="isshow != null" >
+        IsShow = #{isshow,jdbcType=TINYINT},
+      </if>
+    </set>
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.goldeneyes.pojo.SchoolCalendar" >
+    update SchoolCalendar
+    set SchoolId = #{schoolid,jdbcType=VARCHAR},
+      YearId = #{yearid,jdbcType=VARCHAR},
+      PeriodId = #{periodid,jdbcType=VARCHAR},
+      PeriodName = #{periodname,jdbcType=VARCHAR},
+      LastTitle = #{lasttitle,jdbcType=VARCHAR},
+      Title = #{title,jdbcType=VARCHAR},
+      Tag = #{tag,jdbcType=VARCHAR},
+      CalendarAddr = #{calendaraddr,jdbcType=VARCHAR},
+      SendManId = #{sendmanid,jdbcType=BIGINT},
+      SendManCode = #{sendmancode,jdbcType=VARCHAR},
+      SendManName = #{sendmanname,jdbcType=VARCHAR},
+      SendManPic = #{sendmanpic,jdbcType=VARCHAR},
+      SendTime = #{sendtime,jdbcType=TIMESTAMP},
+      Status = #{status,jdbcType=TINYINT},
+      IsShow = #{isshow,jdbcType=TINYINT}
+    where TabId = #{tabid,jdbcType=INTEGER}
+  </update>
+</mapper>
