@@ -355,8 +355,22 @@
 		from
 		(select 1 type,Announcement.TabId AnnouncementId,Tag,AnnouncementTitle,Status,SendTime,SendManName,SendManPic
 				from Announcement,AnnouncementCheck
-		where Announcement.TabId = AnnouncementCheck.AnnouncementId and SchoolId = #{schoolId} and Tag like '%${tag}%' and
-		AnnouncementTitle like '%${title}%' and SendManName like '%${sendMan}%'
+		where Announcement.TabId = AnnouncementCheck.AnnouncementId and SchoolId = #{schoolId} 
+		<choose>
+			<when test="tag != ''">
+				and Tag like '%${tag}%' 
+			</when>
+		</choose>
+		<choose>
+			<when test="title != ''">
+				and AnnouncementTitle like '%${title}%' 
+			</when>
+		</choose>
+		<choose>
+			<when test="sendMan != ''">
+				and SendManName like '%${sendMan}%'
+			</when>
+		</choose>
 		and SendTime &gt;= #{beginDate} and SendTime &lt;= #{endDate} and (#{type} = 0 or #{type} = 1)
 		and Status != 3 and  Status != 4 and IsShow = 1
 		<choose>
@@ -367,8 +381,22 @@
 		union
 		select 2 type,SchoolWeekWork.TabId AnnouncementId,Tag,Title AnnouncementTitle,Status,SendTime,SendManName,SendManPic
 				from SchoolWeekWork,SchoolWeekWorkCheck
-		where SchoolWeekWork.TabId = SchoolWeekWorkCheck.SchoolWeekWorkId and SchoolId = #{schoolId} and Tag like '%${tag}%' and
-		Title like '%${title}%' and SendManName like '%${sendMan}%'
+		where SchoolWeekWork.TabId = SchoolWeekWorkCheck.SchoolWeekWorkId and SchoolId = #{schoolId} 
+		<choose>
+			<when test="tag != ''">
+				and Tag like '%${tag}%' 
+			</when>
+		</choose>
+		<choose>
+			<when test="title != ''">
+				and Title like '%${title}%' 
+			</when>
+		</choose>
+		<choose>
+			<when test="sendMan != ''">
+				and SendManName like '%${sendMan}%'
+			</when>
+		</choose>
 		and SendTime &gt;= #{beginDate} and SendTime &lt;= #{endDate} and (#{type} = 0 or #{type} = 2)
 		and Status != 3 and  Status != 4 and IsShow = 1
 		<choose>
@@ -379,8 +407,22 @@
 		union
 		select 3 type,SchoolCalendar.TabId AnnouncementId,Tag,Title AnnouncementTitle,Status,SendTime,SendManName,SendManPic
 				from SchoolCalendar,SchoolCalendarCheck
-		where SchoolCalendar.TabId = SchoolCalendarCheck.SchoolCalendarId and SchoolId = #{schoolId} and Tag like '%${tag}%' and
-		Title like '%${title}%' and SendManName like '%${sendMan}%'
+		where SchoolCalendar.TabId = SchoolCalendarCheck.SchoolCalendarId and SchoolId = #{schoolId} 
+		<choose>
+			<when test="tag != ''">
+				and Tag like '%${tag}%' 
+			</when>
+		</choose>
+		<choose>
+			<when test="title != ''">
+				and Title like '%${title}%' 
+			</when>
+		</choose>
+		<choose>
+			<when test="sendMan != ''">
+				and SendManName like '%${sendMan}%'
+			</when>
+		</choose>
 		and SendTime &gt;= #{beginDate} and SendTime &lt;= #{endDate} and (#{type} = 0 or #{type} = 3)
 		and Status != 3 and  Status != 4 and IsShow = 1
 		<choose>

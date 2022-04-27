@@ -296,7 +296,11 @@
 		select COUNT(n.tabid)
 		from NoticeLetter n, NoticeLetterCheck nc
 		where n.TabId = nc.LetterId and n.SchoolId = #{schoolId} and LetterType = #{type}
-		and n.LetterName like '%${name}%'
+		<choose>
+			<when test="name != ''">
+				and n.LetterName like '%${name}%'
+			</when>
+		</choose>
 		and n.SendTime &gt;= #{beginDate} and n.SendTime &lt;= #{endDate}
 		and n.LetterStatus != 3 and n.IsShow = 1
 		<choose>
